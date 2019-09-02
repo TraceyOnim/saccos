@@ -22,5 +22,12 @@ defmodule Saccos.FarmerUnitTest do
   test "changeset has valid attributes", %{valid_attr: valid_attr} do
     changeset = Farmer.changeset(%Farmer{}, valid_attr)
     assert changeset.valid?
+    assert {:ok, farmer} = Account.create_farmer(%Farmer{}, valid_attr)
+  end
+
+  test "farmer is created", %{valid_attr: valid_attr} do
+    {:ok, farmer} = Account.create_farmer(%Farmer{}, valid_attr)
+    assert farmer.first_name == "first"
+    assert farmer.last_name == "last"
   end
 end
