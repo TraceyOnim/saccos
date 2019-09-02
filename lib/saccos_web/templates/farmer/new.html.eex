@@ -1,54 +1,59 @@
 <h1>Register Farmer</h1>
+<div>
+	<%= if @changeset.action do %>
+	<div class = "alert alert-danger">
+		<p> Something went wrong.Try Again!</p>
+	</div>
+	<% end %>
+</div>
 <%= form_for @changeset, Routes.farmer_path(@conn, :create), fn f -> %>
 <div>
 	<%= label f, :first_name, "FirstName" %>
-<%= text_input f, :first_name, placeholder: "First_name" %>
+	<%= text_input f, :first_name, placeholder: "First_name" %>
 </div>
 <div>
 	<%= label f, :last_name, "LastName" %>
-<%= text_input f, :last_name, placeholder: "Last_name" %>
+	<%= text_input f, :last_name, placeholder: "Last_name" %>
 </div>
 <div>
 	<%= label f, :national_id, "National_id" %>
-<%= text_input f, :national_id, placeholder: "national_id" %>
+	<%= text_input f, :national_id, placeholder: "national_id" %>
 </div>
 <div>
 	<%= label f, :phone_number, "PhoneNumber" %>
-<%= text_input f, :phone_number, placeholder: "phone_number" %>
+	<%= text_input f, :phone_number, placeholder: "phone_number" %>
 </div>
 <div>
 	<%= label f, :nationality, "Nationality" %>
-<%= text_input f, :nationality, placeholder: "nationality" %>
+	<%= text_input f, :nationality, placeholder: "nationality" %>
 </div>
 <div>
 	<%= label f, :location, "Location" %>
-<%= text_input f, :location, placeholder: "location" %>
+	<%= text_input f, :location, placeholder: "location" %>
 </div>
 <div>
 	<%= label f, :dob, "DOB" %>
-<%= date_input f, :dob, placeholder: "date of birth" %>
+	<%= date_input f, :dob, placeholder: "date of birth" %>
 </div>
 <div>
 	<%= label f, :nok_first_name, "NOK_FirstName" %>
-<%= text_input f, :nok_first_name, placeholder: "nok_first_name" %>
+	<%= text_input f, :nok_first_name, placeholder: "nok_first_name" %>
 </div>
 <div>
 	<%= label f, :nok_last_name, "NOK_LastName" %>
-<%= text_input f, :nok_last_name, placeholder: "nok_last_name" %>
+	<%= text_input f, :nok_last_name, placeholder: "nok_last_name" %>
 </div>
 <div>
 	<%= label f, :nok_national_id, "NOK_National_id" %>
-<%= text_input f, :nok_national_id, placeholder: "nok_national_id" %>
+	<%= text_input f, :nok_national_id, placeholder: "nok_national_id" %>
 </div>
 <div>
 	<%= label f, :nok_phone_number, "NOK_Phone_number" %>
-<%= text_input f, :nok_phone_number, placeholder: "nok_phone_number" %>
+	<%= text_input f, :nok_phone_number, placeholder: "nok_phone_number" %>
 </div>
 <div>
 	<%= label f, :nok_dob, "NOK_DOB" %>
-<%= date_input f, :nok_dob, placeholder: "nok_dob" %>
+	<%= date_input f, :nok_dob, placeholder: "nok_dob" %>
 </div>
 <%= submit "submit" %>
 <% end %>
-
-
