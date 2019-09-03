@@ -16,3 +16,7 @@ config :saccos, SaccosWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# configure phoenix integration
+config :phoenix_integration,
+  endpoint: SaccosWeb.Endpoint
