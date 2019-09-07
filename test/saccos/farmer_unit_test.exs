@@ -30,4 +30,14 @@ defmodule Saccos.FarmerUnitTest do
     assert farmer.first_name == "first"
     assert farmer.last_name == "last"
   end
+
+  test "first_name is required", %{valid_attr: valid_attr} do
+    attr = %{valid_attr | "first_name" => ""}
+    assert {:error, changeset} = Account.create_farmer(%Farmer{}, attr)
+  end
+
+  test "first_name must be of minimum length of 3", %{valid_attr: valid_attr} do
+    attr = %{valid_attr | "first_name" => "to"}
+    assert {:error, changeset} = Account.create_farmer(%Farmer{}, attr)
+  end
 end

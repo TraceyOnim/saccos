@@ -10,50 +10,63 @@
 <div>
 	<%= label f, :first_name, "FirstName" %>
 	<%= text_input f, :first_name, placeholder: "First_name" %>
+	<%= error_tag f, :first_name%>
 </div>
 <div>
 	<%= label f, :last_name, "LastName" %>
 	<%= text_input f, :last_name, placeholder: "Last_name" %>
+	<%= error_tag f, :last_name%>
 </div>
 <div>
 	<%= label f, :national_id, "National_id" %>
 	<%= text_input f, :national_id, placeholder: "national_id" %>
+	<%= error_tag f, :national_id%>
 </div>
 <div>
 	<%= label f, :phone_number, "PhoneNumber" %>
 	<%= text_input f, :phone_number, placeholder: "phone_number" %>
+	<%= error_tag f, :phone_number%>
 </div>
 <div>
 	<%= label f, :nationality, "Nationality" %>
 	<%= text_input f, :nationality, placeholder: "nationality" %>
+	<%= error_tag f, :nationality%>
 </div>
 <div>
 	<%= label f, :location, "Location" %>
 	<%= text_input f, :location, placeholder: "location" %>
+	<%= error_tag f, :location%>
 </div>
 <div>
 	<%= label f, :dob, "DOB" %>
 	<%= date_input f, :dob, placeholder: "date of birth" %>
+	<%= error_tag f, :dob%>
+
 </div>
 <div>
 	<%= label f, :nok_first_name, "NOK_FirstName" %>
 	<%= text_input f, :nok_first_name, placeholder: "nok_first_name" %>
+	<%= error_tag f, :nok_first_name%>
 </div>
 <div>
 	<%= label f, :nok_last_name, "NOK_LastName" %>
 	<%= text_input f, :nok_last_name, placeholder: "nok_last_name" %>
+	<%= error_tag f, :nok_last_name%>
 </div>
 <div>
 	<%= label f, :nok_national_id, "NOK_National_id" %>
 	<%= text_input f, :nok_national_id, placeholder: "nok_national_id" %>
+	<%= error_tag f, :nok_national_id%>
 </div>
 <div>
 	<%= label f, :nok_phone_number, "NOK_Phone_number" %>
 	<%= text_input f, :nok_phone_number, placeholder: "nok_phone_number" %>
+	<%= error_tag f, :nok_phone_number%>
 </div>
 <div>
 	<%= label f, :nok_dob, "NOK_DOB" %>
 	<%= date_input f, :nok_dob, placeholder: "nok_dob" %>
+	<%= error_tag f, :nok_dob%>
 </div>
 <%= submit "submit" %>
 <% end %>
