@@ -6,6 +6,7 @@ defmodule Saccos.Farmer do
   """
   use Ecto.Schema
   import Ecto.Changeset
+  alias Saccos.Accounts.Credential
 
   schema "farmers" do
     field :first_name, :string
@@ -20,6 +21,7 @@ defmodule Saccos.Farmer do
     field :nok_national_id, :string
     field :nok_phone_number, :string
     field :nok_dob, :date
+    has_one :credential, Credential
 
     timestamps()
   end
@@ -109,5 +111,11 @@ defmodule Saccos.Farmer do
     |> validate_format(:nok_national_id, ~r/^\d{7,10}+$/,
       message: "The national id number seems incorrect"
     )
+  end
+
+  def registration_changeset(farmer, params) do
+    farmer
+    |> changeset(params)
+    |> cast_assoc(:credential, with: &Credential.changeset/2, required: true)
   end
 end
