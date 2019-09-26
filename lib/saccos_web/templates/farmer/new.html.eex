@@ -17,6 +17,18 @@
 	<%= text_input f, :last_name, placeholder: "Last_name" %>
 	<%= error_tag f, :last_name%>
 </div>
+
+<div>
+<%= inputs_for f, :credential, fn cf -> %>
+<%= label cf, :email, "Email" %>
+<%= text_input cf, :email, placeholder: "Email" %>
+<%= error_tag cf, :email %>
+<%= label cf, :password, "Password" %>
+<%= password_input cf, :password, placeholder: "Password" %>
+<%= error_tag cf, :password %>
+<% end %>
+</div>
+
 <div>
 	<%= label f, :national_id, "National_id" %>
 	<%= text_input f, :national_id, placeholder: "national_id" %>
@@ -43,6 +55,8 @@
 	<%= error_tag f, :dob%>
 
 </div>
+
+
 <div>
 	<%= label f, :nok_first_name, "NOK_FirstName" %>
 	<%= text_input f, :nok_first_name, placeholder: "nok_first_name" %>
@@ -68,5 +82,7 @@
 	<%= date_input f, :nok_dob, placeholder: "nok_dob" %>
 	<%= error_tag f, :nok_dob%>
 </div>
+
+
 <%= submit "submit" %>
 <% end %>
