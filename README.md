@@ -1,4 +1,6 @@
-# Saccos
+# Farmer Saccos
+
+Farmer Saccos is a web-based application system whose main purpose is to enable small-scale farmers to engage thousands of buyers directly when produce is ready and also to be able to connect with other farmers to share ideas and challenges they face.It will also enable farmers to reach optimum production by providing them with step by step guide on good farming practices , market price trends, current weather condition and to keep them up-to-date with everything going on in the world of farming.
 
 To start your Phoenix server:
 
