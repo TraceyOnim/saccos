@@ -55,4 +55,4 @@ jobs:
 
       - store_test_results:  
           
-          path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME 
+          path: _build/test/lib/saccos
