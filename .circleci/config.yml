@@ -1,110 +1,58 @@
-version: 2.1
-jobs:
-build:
-    docker:
-    - image: circleci/elixir:1.8.2
-        environment:
-        MIX_ENV: test
+version: 2.0  
+jobs:  
+  build:  
+    parallelism: 1  
+    docker:  
+      - image: circleci/elixir:1.7.3  
+        environment: 
+          MIX_ENV: test
+      - image: circleci/postgres:10.1-alpine  
+        environment: 
+          POSTGRES_USER: postgres
+          POSTGRES_DB: app_test
+          POSTGRES_PASSWORD:
 
-    steps:
-    - checkout
+    working_directory: ~/app  
 
-    - run: mix local.hex --force
-    - run: mix local.rebar --force
+    steps:  
+      - checkout  
 
-    - restore_cache:
-        key: deps-cache-{{ checksum "mix.lock" }}
-    - run: mix do deps.get, deps.compile
-    - save_cache:
-        key: deps-cache-{{ checksum "mix.lock" }}
-        paths:
-            - deps
-            - ~/.mix
-            - _build
+      - run: mix local.hex --force  
+      - run: mix local.rebar --force  
 
-    - run: mix compile
+      - restore_cache:  
+      
+          keys:  
+            - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+            - v1-mix-cache-{{ .Branch }}
+            - v1-mix-cache
+      - restore_cache:  
+          keys:
+            - v1-build-cache-{{ .Branch }}
+            - v1-build-cache
+      - run: mix do deps.get, compile  
+      - save_cache: 
+          key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+          paths: "deps"
+      - save_cache:  
+          key: v1-mix-cache-{{ .Branch }}
+          paths: "deps"
+      - save_cache:  
+          key: v1-mix-cache
+          paths: "deps"
+      - save_cache: 
+          key: v1-build-cache-{{ .Branch }}
+          paths: "_build"
+      - save_cache: 
+          key: v1-build-cache
+          paths: "_build"
 
-    - run: echo "$OTP_VERSION $ELIXIR_VERSION" > .version_file
-    - restore_cache:
-        keys:
-            - plt-cache-{{ checksum ".version_file" }}-{{ checksum "mix.lock" }}
-    - run: mix dialyzer --plt
-    - save_cache:
-        key: plt-cache-{{ checksum ".version_file"  }}-{{ checksum "mix.lock" }}
-        paths:
-            - _build
-            - deps
-            - ~/.mix
-            
-  test:
-    docker:
-    - image: circleci/elixir:1.8.2
-   
-   steps:
-    - checkout
-    - restore_cache:
-        key: deps-cache-{{ checksum "mix.lock" }}
-    - run: mix coveralls.html
+      - run: 
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-    - store_artifacts:
-        path: cover
-        destination: coverage_results
-        
-        generate_documentation:
-    docker:
-    - image: circleci/elixir:1.8.2
-        environment:
-        MIX_ENV: test
+      - run: mix test 
 
-    steps:
-    - checkout
-    - restore_cache:
-        key: deps-cache-{{ checksum "mix.lock" }}
-    - run: mix docs
-
-    - store_artifacts:
-        path: doc
-        destination: documentation
-        
-        dialyzer:
-    docker:
-    - image: circleci/elixir:1.8.2
-        environment:
-        MIX_ENV: test
-
-    steps:
-    - checkout
-    - run: echo "$OTP_VERSION $ELIXIR_VERSION" > .version_file
-    - restore_cache:
-        keys:
-            - plt-cache-{{ checksum ".version_file" }}-{{ checksum "mix.lock" }}
-    - run: mix dialyzer --halt-exit-status
-    
-    format_check:
-    docker:
-    - image: circleci/elixir:1.8.2
-        environment:
-        MIX_ENV: test
-
-    steps:
-    - checkout
-
-    - run: mix format --check-formatted
-    
-    workflows:
-  version: 2
-  build_and_test:
-    jobs:
-    - build
-    - format_check:
-        requires:
-            - build
-    - generate_documentation:
-        requires:
-            - build
-    - dialyzer:
-        requires:
-            - build
-    - test:
-        requires:
-            - build
+      - store_test_results:  
+          
+          path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME 
